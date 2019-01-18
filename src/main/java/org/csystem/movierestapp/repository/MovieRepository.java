@@ -11,9 +11,17 @@ import java.util.Optional;
 //Dependency injection için anatosyonlar
 @Repository
 @Transactional
-public class MovieRepository implements IMovieRepository{
+public class MovieRepository implements IMovieRepository{ //Bu daoyu, dal katmanı veya servis katmanı kullanacak.Katmansal mimarı için.
     @PersistenceContext
     private EntityManager m_entityManager; //İşte bu bize spring boot yardımı.
+
+    @Override
+    public Iterable<MovieInfo> findAll()
+    {
+        var query = m_entityManager.createQuery("SELECT m FROM MovieInfo m", MovieInfo.class);
+        return query.getResultList();
+    }
+
     @Override
     public Iterable<MovieInfo> findByName(String name)
     {
@@ -39,12 +47,6 @@ public class MovieRepository implements IMovieRepository{
     }
 
     @Override
-    public Iterable<MovieInfo> findAll()
-    {
-        return null;
-    }
-
-    @Override
     public Optional<MovieInfo> findById()
     {
         return Optional.empty();
@@ -53,7 +55,9 @@ public class MovieRepository implements IMovieRepository{
     @Override
     public <E extends MovieInfo> E save(E e)
     {
-        return null;
+        m_entityManager.persist(e);
+
+        return e;
     }
 
     @Override
