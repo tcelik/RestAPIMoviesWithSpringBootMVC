@@ -52,6 +52,7 @@ public class MovieRepository implements IMovieRepository{ //Bu daoyu, dal katman
         return Optional.empty();
     }
 
+    //Önce kayıt et, sonra findAll ile hepsini al ilk adım.
     @Override
     public <E extends MovieInfo> E save(E e)
     {
