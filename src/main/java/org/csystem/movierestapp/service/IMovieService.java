@@ -1,5 +1,8 @@
 package org.csystem.movierestapp.service;
 
-public interface IMovieService {
+import org.csystem.movierestapp.entity.MovieInfo;
+import org.csystem.service.IService;
+
+public interface IMovieService extends IService<MovieInfo, Long> {
 
 }
